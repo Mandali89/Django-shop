@@ -1,0 +1,19 @@
+
+import django.db.models.deletion
+from django.db import migrations, models
+
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        ('accounts', '0003_cart_coupon'),
+        ('products', '0005_alter_coupon_discount_amount'),
+    ]
+
+    operations = [
+        migrations.AlterField(
+            model_name='cartitem',
+            name='size_variant',
+            field=models.ForeignKey(blank=True, default='', on_delete=django.db.models.deletion.CASCADE, to='products.sizevariant'),
+        ),
+    ]

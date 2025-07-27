@@ -1,0 +1,173 @@
+{% load static %}
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    font-family: 'Vazirmatn', sans-serif;
+    direction: rtl;
+  }
+  .navbar {
+    background-color: #081828;
+  }
+  .navbar-nav .nav-link {
+    color: #ffffff;
+  }
+  .navbar-nav .nav-link:hover {
+    color: #0066cc;
+  }
+  .btn-primary {
+    background-color: #0066cc;
+    border-color: #0066cc;
+  }
+  .btn-primary:hover {
+    background-color: #004d99;
+    border-color: #004d99;
+  }
+  @media (max-width: 992px) {
+    .widgets-wrap {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: right;
+      flex-wrap: nowrap;
+    }
+    .widget-header {
+      margin-left: 10px;
+    }
+    .icontext {
+      display: flex;
+      align-items: center;
+    }
+    .icontext .text {
+      text-align: right;
+      white-space: nowrap;
+    }
+    .text span {
+      display: block;
+    }
+    .text div {
+      display: inline;
+    }
+  }
+</style>
+
+<header class="section-header">
+  <nav class="navbar navbar-dark navbar-expand-md bg-dark">
+    <div class="container">
+      <button
+        class="navbar-toggler mr-auto"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarCollapse"
+        aria-controls="navbarCollapse"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav ml-auto" style="gap: 20px;">
+          <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">خانه</a></li>
+          {% if user.is_authenticated %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'wishlist' %}">لیست علاقه‌مندی‌ها ({{ request.user.wishlist.count }})</a></li>
+          {% else %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'wishlist' %}">لیست علاقه‌مندی‌ها</a></li>
+          {% endif %}
+          <li class="nav-item"><a class="nav-link" href="{% url 'order_history' %}">سفارش‌های شما</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'product_reviews' %}">نظرات شما</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">تماس با ما</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">درباره ما</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="header-main border-bottom">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-2 col-4">
+          <div class="brand-wrap">
+            <a href="{% url 'index' %}">
+              <img class="logo" src="{% static 'images/logo.png' %}" />
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-12">
+          <form method="GET" action="{% url 'product_search' %}" class="search">
+            <div class="input-group w-100">
+              <input type="text" class="form-control" name="q"
+              placeholder="جستجو" value="{{ query|default:"" }}"/>
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="col-lg-4 col-sm-6 col-8">
+          <div class="widgets-wrap float-md-left">
+            <!-- Cart Icon with badge -->
+            <div class="widget-header ml-3">
+              <a href="{% url 'cart' %}" class="icon icon-sm rounded-circle border">
+                <i class="fa fa-shopping-cart"></i>
+              </a>
+              {% if user.is_authenticated %}
+                <span class="badge badge-pill badge-danger notify">
+                  {{request.user.profile.get_cart_count}}
+                </span>
+              {% else %}
+                <span class="badge badge-pill badge-danger notify"></span>
+              {% endif %}
+            </div>
+
+            <div class="widget-header icontext">
+              {% if user.is_authenticated %}
+                {% if user.profile.profile_image %}
+                  <a href="{% url 'profile' username=user.username %}"
+                  class="icon icon-sm rounded-circle border">
+                    <img
+                      src="{{ user.profile.profile_image.url }}"
+                      alt="تصویر پروفایل"
+                      class="rounded-circle"
+                      width="42"
+                      height="42"
+                    />
+                  </a>
+                {% else %}
+                  <a
+                    href="{% url 'profile' username=user.username %}"
+                    class="icon icon-sm rounded-circle border">
+                    <i class="fa fa-user"></i>
+                  </a>
+                {% endif %}
+              {% else %}
+                <a href="{% url 'login' %}" class="icon icon-sm rounded-circle border">
+                  <i class="fa fa-user"></i>
+                </a>
+              {% endif %}
+
+              <div class="text">
+                {% if request.user.is_authenticated %}
+                <span class="text-muted">خوش آمدید، {{ request.user }}!</span>
+                <div>
+                  <a href="{% url 'logout' %}">خروج</a>
+                </div>
+                {% else %}
+                <span class="text-muted">خوش آمدید</span>
+                <div>
+                  <a href="{% url 'login' %}">ورود</a> |
+                  <a href="{% url 'register' %}">ثبت‌نام</a>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</header>

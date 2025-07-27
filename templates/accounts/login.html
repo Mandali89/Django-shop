@@ -1,0 +1,97 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load socialaccount %}
+{% block title %}ورود{% endblock %}
+{% block start %}
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    font-family: 'Vazirmatn', sans-serif;
+    direction: rtl;
+  }
+  .card {
+    border-radius: 8px;
+    box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
+  }
+  .btn-primary {
+    background-color: #0066cc;
+    border-color: #0066cc;
+  }
+  .btn-primary:hover {
+    background-color: #004d99;
+    border-color: #004d99;
+  }
+</style>
+
+<section class="section-content padding-bottom">
+  <div class="container-xl d-flex justify-content-center align-items-center mt-5">
+    <div class="row justify-content-center w-100">
+      <div class="col-xl-4">
+        <div class="card mb-4">
+          <div class="card-header" style="text-align: center; font-size: 25px">
+            ورود
+          </div>
+          <div class="card-body">
+            <form method="POST" action="{% url 'login' %}?next={{ request.GET.next }}">
+              {% csrf_token %}
+              {% include "base/alert.html" %}
+
+              <div class="form-group">
+                <input
+                  class="form-control"
+                  required
+                  placeholder="نام کاربری"
+                  name="username"
+                  type="text"
+                  autocomplete="username"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  class="form-control"
+                  required
+                  placeholder="رمز عبور"
+                  name="password"
+                  type="password"
+                />
+              </div>
+
+              <div class="form-group">
+                <a href="{% url 'password_reset' %}" class="float-right">
+                  رمز عبور را فراموش کرده‌اید؟
+                </a>
+                <label class="float-left custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" checked/>
+                  <div class="custom-control-label">به خاطر سپردن</div>
+                </label>
+              </div>
+
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">
+                  ورود
+                </button>
+              </div>
+
+              <p class="text-center mt-4">
+                حساب کاربری ندارید؟ <a href="{% url 'register' %}">ثبت‌نام</a>
+              </p>
+
+              <div class="line"></div>
+
+              <div class="media-options">
+                <a href="{% provider_login_url 'google' %}?next=/" class="field google">
+                  <img src="{% static 'images/google.png' %}" alt="" class="google-img"/>
+                  <span>ورود با گوگل</span>
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

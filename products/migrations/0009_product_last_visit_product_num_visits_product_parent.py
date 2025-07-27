@@ -1,0 +1,28 @@
+
+import django.db.models.deletion
+from django.db import migrations, models
+
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        ('products', '0008_alter_product_newest_product'),
+    ]
+
+    operations = [
+        migrations.AddField(
+            model_name='product',
+            name='last_visit',
+            field=models.DateTimeField(blank=True, null=True),
+        ),
+        migrations.AddField(
+            model_name='product',
+            name='num_visits',
+            field=models.IntegerField(default=0),
+        ),
+        migrations.AddField(
+            model_name='product',
+            name='parent',
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='variants', to='products.product'),
+        ),
+    ]

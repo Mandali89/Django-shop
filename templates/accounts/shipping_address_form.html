@@ -1,0 +1,96 @@
+{% extends "base/base.html" %}
+{% block title %}آدرس ارسال{% endblock title %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block start %}
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    font-family: 'Vazirmatn', sans-serif;
+    direction: rtl;
+  }
+  .img-account-profile {
+    height: 10rem;
+  }
+  .rounded-circle {
+    border-radius: 50% !important;
+  }
+  .card {
+    box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
+    border-radius: 8px;
+  }
+  .card .card-header {
+    font-weight: 500;
+    background-color: #f8f9fa;
+  }
+  .nav-borders .nav-link.active {
+    color: #0066cc;
+    border-bottom-color: #0066cc;
+  }
+  .nav-borders .nav-link {
+    color: #69707a;
+    border-bottom-width: 0.125rem;
+    border-bottom-style: solid;
+    border-bottom-color: transparent;
+    padding: 0.5rem 1rem;
+  }
+  .btn-primary, .btn-warning {
+    background-color: #0066cc;
+    border-color: #0066cc;
+  }
+  .btn-primary:hover, .btn-warning:hover {
+    background-color: #004d99;
+    border-color: #004d99;
+  }
+</style>
+
+<section class="section-content padding-bottom">
+  <div class="container-xl px-4 mt-4">
+    {% include "base/alert.html" %}
+    <nav class="nav nav-borders">
+      <a class="nav-link ms-0" href="{% url 'profile' username=user.username %}">پروفایل</a>
+      <a class="nav-link active ms-0" href="{% url 'shipping-address' %}">آدرس</a>
+      <a class="nav-link ms-0" href="{% url 'change_password' %}">امنیت</a>
+    </nav>
+
+    <hr class="mt-0 mb-4" />
+    <div class="row">
+      <div class="col-xl-20">
+        <div class="card mb-4">
+          <div class="card-header">آدرس ارسال</div>
+          <div class="card-body">
+            <form method="POST">
+              {% csrf_token %}
+              <div class="form-row">
+                <div class="form-group col-md-6">{{ form.first_name|as_crispy_field }}</div>
+                <div class="form-group col-md-6">{{ form.last_name|as_crispy_field }}</div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-8">{{ form.street|as_crispy_field }}</div>
+                <div class="form-group col-md-4">
+                  {{ form.street_number|as_crispy_field }}
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-8">{{ form.city|as_crispy_field }}</div>
+                <div class="form-group col-md-4">{{ form.zip_code|as_crispy_field }}</div>
+              </div>
+              {{ form.country|as_crispy_field }}
+              {{ form.phone|as_crispy_field }}
+              <div class="form-group d-flex justify-content-end">
+                <div class="d-sm-flex">
+                  <a class="mb-2 mb-sm-0 mr-0 mr-sm-3 btn btn-warning" href="{% url 'index' %}">بازگشت به صفحه اصلی</a>
+                  <button class="btn btn-primary" type="submit">به‌روزرسانی آدرس ارسال</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

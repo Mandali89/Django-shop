@@ -1,0 +1,91 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}درباره ما{% endblock %}
+{% block start %}
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    font-family: 'Vazirmatn', sans-serif;
+    direction: rtl;
+  }
+  .para-text {
+    line-height: 2rem;
+    text-align: justify;
+    font-size: 16px;
+    color: #333333;
+  }
+  h2, h3 {
+    color: #212529;
+  }
+  .card {
+    border-radius: 8px;
+    box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
+  }
+</style>
+
+<section class="section-content padding-y">
+  <div class="container-xl d-flex justify-content-center align-items-center">
+    <div class="row justify-content-center w-100">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <img
+              src="{% static 'images/about-us.png' %}"
+              alt="لوگوی درباره ما"
+              class="img-fluid mb-4"
+            />
+            <h2>درباره ما</h2>
+            <p class="para-text">
+              به وب‌سایت تجارت الکترونیک ما خوش آمدید! ما متعهد به ارائه بهترین تجربه خرید آنلاین به شما هستیم. سفر ما با یک ایده ساده آغاز شد: آسان، قابل دسترس و لذت‌بخش کردن خرید برای همه. در طول سال‌ها، ما به یک خرده‌فروش آنلاین قابل اعتماد تبدیل شده‌ایم که طیف گسترده‌ای از محصولات را برای رفع نیازهای شما ارائه می‌دهد.
+            </p>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-md-6">
+            <h3>ماموریت ما</h3>
+            <p class="para-text">
+              ماموریت ما ارائه محصولات با کیفیت بالا با قیمت‌های رقابتی، همراه با خدمات مشتریان استثنایی است. ما در تلاشیم تا تجربه خریدی بی‌نقص، از مرور تا تحویل، ایجاد کنیم و اطمینان حاصل کنیم که شما بهترین ارزش و رضایت را دریافت می‌کنید.
+            </p>
+          </div>
+          <div class="col-md-6">
+            <h3>چشم‌انداز ما</h3>
+            <p class="para-text">
+              چشم‌انداز ما تبدیل شدن به پیشرو در خرده‌فروشی آنلاین، شناخته شده برای تعهد به کیفیت، نوآوری و رضایت مشتری است. ما قصد داریم دامنه محصولات خود را به طور مداوم گسترش دهیم و خدمات خود را برای پاسخگویی به نیازهای در حال تحول مشتریان بهبود ببخشیم.
+            </p>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-md-12">
+            <h3>ارزش‌های ما</h3>
+            <i
+              class="fas fa-check-circle"
+              style="color: green; line-height: 2rem; margin-left: 10px;"
+            ></i>
+            <strong>اولویت ها:</strong> ما نیازهای مشتریان خود را در اولویت قرار می‌دهیم و در تلاشیم تا با هر تعامل از انتظارات آن‌ها فراتر رویم.
+            <br />
+            <i
+              class="fas fa-check-circle"
+              style="color: green; line-height: 2rem; margin-left: 10px;"
+            ></i>
+            <strong>کیفیت:</strong> ما متعهد به ارائه محصولاتی با بالاترین کیفیت هستیم و از هر چیزی که می‌فروشیم پشتیبانی می‌کنیم.
+            <br />
+            <i
+              class="fas fa-check-circle"
+              style="color: green; line-height: 2rem; margin-left: 10px;"
+            ></i>
+            <strong>صداقت:</strong> ما تجارت خود را با صداقت و شفافیت انجام می‌دهیم.
+          </div>
+        </div>
+        <div class="row mt-3">
+          <p class="para-text">
+            امیدواریم از محصولات ما به همان اندازه که ما از ارائه آن‌ها به شما لذت می‌بریم، لذت ببرید. اگر سؤال یا نظری دارید، لطفاً در تماس با ما از طریق <a href="{% url 'contact' %}">صفحه تماس</a> تردید نکنید.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
